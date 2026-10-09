@@ -80,8 +80,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func commit() {
         let selected = switcher.selectedWindow
         switcher.hide()
+        // Off the main thread: un-minimizing through Accessibility blocks until the app's animation
+        // finishes, which would keep the panel on screen (and the event tap stalled) until then.
         if let selected {
-            WindowActivator.activate(selected)
+            DispatchQueue.global(qos: .userInteractive).async {
+                WindowActivator.activate(selected)
+            }
         }
     }
 
