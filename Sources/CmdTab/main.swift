@@ -36,6 +36,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         tap.onCommit = { [weak self] in self?.commit() }
         tap.onCancel = { [switcher] in switcher.hide() }
         tap.onClose = { [weak self] in self?.closeSelected() }
+        tap.onHide = { [weak self] in self?.hideSelected() }
         switcher.model.onPick = { [weak self] index in
             self?.switcher.model.selection = index
             self?.commit()
@@ -75,6 +76,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let selected = switcher.selectedWindow else { return }
         let closed = WindowCloser.close(selected, allWindows: switcher.model.windows)
         switcher.remove(closed)
+    }
+
+    /// Hides the highlighted window's app, like ⌘H. Its windows stay in the list since they remain switchable.
+    private func hideSelected() {
+        guard let selected = switcher.selectedWindow else { return }
+        NSRunningApplication(processIdentifier: selected.pid)?.hide()
     }
 
     private func commit() {

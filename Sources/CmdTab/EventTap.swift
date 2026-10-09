@@ -9,6 +9,7 @@ final class HotKeyTap {
     var onCommit: () -> Void = {}
     var onCancel: () -> Void = {}
     var onClose: () -> Void = {}
+    var onHide: () -> Void = {}
     var isActive: () -> Bool = { false }
 
     private var tap: CFMachPort?
@@ -19,6 +20,7 @@ final class HotKeyTap {
     private static let leftArrowKey = 123
     private static let rightArrowKey = 124
     private static let wKey = 13
+    private static let hKey = 4
 
     func start() -> Bool {
         let mask: CGEventMask = (1 << CGEventType.keyDown.rawValue)
@@ -73,6 +75,7 @@ final class HotKeyTap {
             case Self.leftArrowKey: onMove(-1)
             case Self.rightArrowKey: onMove(1)
             case Self.wKey: onClose()
+            case Self.hKey: onHide()
             default: break
             }
             return nil

@@ -5,7 +5,7 @@ thumbnail of each one. No settings, no menu bar item, nothing to configure.
 
 - `⌘⇥` opens the switcher and moves forward, `⌘⇧⇥` moves backward, `←`/`→` also work.
 - Release `⌘` to switch to the highlighted window, `Esc` to cancel, `W` to close the highlighted
-  window (or quit its app when that was its last window). Hovering highlights a window
+  window (or quit its app when that was its last window), `H` to hide its app. Hovering highlights a window
   and clicking it switches too.
 - Windows are ordered most-recently-used first, including minimized windows, windows on other
   Spaces and windows of hidden apps.
